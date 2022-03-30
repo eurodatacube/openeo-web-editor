@@ -15,6 +15,7 @@
 			<button title="Download" @click="downloadResults(p.row)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-download"></i></button>
 			<button title="View results" @click="viewResults(p.row, true)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-eye"></i></button>
 			<button title="View logs" @click="showLogs(p.row)" v-show="supports('debugJob')"><i class="fas fa-bug"></i></button>
+			<button title="Share" @click="shareResults(p.row)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-download"></i></button>
 		</template>
 	</DataTable>
 </template>
@@ -24,6 +25,7 @@ import EventBusMixin from './EventBusMixin.vue';
 import WorkPanelMixin from './WorkPanelMixin';
 import Utils from '../utils.js';
 import { AbortController, Job } from '@openeo/js-client';
+import axios from 'axios'
 
 const WorkPanelMixinInstance = WorkPanelMixin('jobs', 'batch job', 'batch jobs');
 
@@ -356,6 +358,16 @@ export default {
 			} catch(error) {
 				Utils.exception(this, error, 'View Result Error: ' + Utils.getResourceTitle(job));
 			}
+		},
+		async shareResults(job) {
+			const result = await job.getResultsAsStac();
+			const formData = new FormData();
+			formData.append("my-file.json", JSON.stringify(result));
+			const res = await axios.post(
+				'/api/upload',
+				formData,
+			);
+			console.log(res)
 		},
 		async downloadResults(job) {	
 			// Doesn't need to go through job store as it doesn't change job-related data
