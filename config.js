@@ -53,7 +53,7 @@ export default {
 
 	// Key is the OIDC provider id, value is the client ID
 	oidcClientIds: {
-		'egi': 'edc-openeo-web-editor',
+		'egi': 'openeo-platform-default-client',
 		'egi-dev': 'dev-edc-openeo-web-editor'
 	},
 
