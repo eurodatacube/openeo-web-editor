@@ -15,7 +15,7 @@
 			<button title="Download" @click="downloadResults(p.row)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-download"></i></button>
 			<button title="View results" @click="viewResults(p.row, true)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-eye"></i></button>
 			<button title="View logs" @click="showLogs(p.row)" v-show="supports('debugJob')"><i class="fas fa-bug"></i></button>
-			<button title="Share" @click="shareResults(p.row)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-share"></i></button>
+			<button title="Share" @click="shareResults(p.row)" v-show="supports('downloadResults') && hasResults(p.row)"><i class="fas fa-download"></i></button>
 		</template>
 	</DataTable>
 </template>
