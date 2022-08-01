@@ -9,7 +9,7 @@ export default {
 			type: String,
 			default: null
 		},
-		stac: {
+		job: {
 			type: Object,
 			required: true
 		}
