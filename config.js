@@ -62,7 +62,10 @@ export default {
 	processNamespaces: [],
 
 	// Key is the OIDC provider id, value is the client ID
-	oidcClientIds: {},
+	oidcClientIds: {
+		'egi': 'openeo-platform-default-client',
+		'egi-dev': 'dev-edc-openeo-web-editor'
+	},
 
 	// Show a warning if HTTP is used instead of HTTPS
 	showHttpWarning: true,
