@@ -406,7 +406,7 @@ export default {
 		async shareResults(job) {
 			if (this.canShare) {
 				let result = await job.getResultsAsStac();
-				let url;
+				let url = "";
 				let link;
 				if (Array.isArray(result.links)) {
 					link = result.links.find(link => link.rel === 'canonical');
@@ -414,13 +414,8 @@ export default {
 						url = link.href;
 					}
 				}
-				if (url) {
-					let title = result.properties?.title || job.title || link?.title;
-					this.emit('showModal', 'ShareModal', {url, title, extra: result, context: job});
-				}
-				else {
-					Utils.error(this, "Sorry, this job has no public URL");
-				}
+                let title = result.properties?.title || job.title || link?.title;
+                this.emit('showModal', 'ShareModal', {url, title, extra: result, context: job});
 			}
 		},
 		mayHaveResults(job) {

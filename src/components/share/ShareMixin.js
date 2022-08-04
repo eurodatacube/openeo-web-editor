@@ -8,7 +8,7 @@ export default {
 		// A public URL to the resource
 		url: {
 			type: String,
-			required: true
+			required: false
 		},
 		// A title for the resource, if available
 		title: {
