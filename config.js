@@ -39,8 +39,7 @@ export default {
 
 	// List of supported batch job sharing services
 	supportedBatchJobSharingServices: [
-		'CopyUrl',
-		'TwitterShare'
+		'EDCShare'
 	],
 
 	// List of supported web service sharing services
