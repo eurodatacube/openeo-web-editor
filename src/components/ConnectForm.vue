@@ -231,6 +231,14 @@ export default {
 		if (this.autoConnect) {
 			this.submitForm();
 		}
+
+        this.$nextTick(async () => {
+            this.serverUrl = "https://w0j9yieg9l.execute-api.eu-central-1.amazonaws.com/testing";
+            await this.initConnection(false, true);
+            this.$nextTick(async () => {
+                await this.initDiscovery(this.basicProvider);
+            });
+        });
 	},
 	methods: {
 		...Utils.mapActions(['connect', 'discover', 'logout']),
@@ -344,7 +352,11 @@ export default {
 			this.loading = true;
 			let authType = Utils.isObject(provider) && typeof provider.getType() === 'string' ? provider.getType() : null;
 			try {
-				if (authType === 'basic') {
+                if (true) {
+                    const response = await axios.post("/token_sentinel_hub");
+                    const token = response.data['access_token'];
+                    provider.setToken(token);
+                } else if (authType === 'basic') {
 					await provider.login(this.username, this.password);
 				}
 				else if (authType === 'oidc') {
