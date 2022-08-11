@@ -38,7 +38,8 @@ export default {
     methods: {
         upload() {
             const formData = new FormData();
-            formData.append("my-file.json", JSON.stringify(this.extra));
+            const filename = this.title.replace(" ", "-") + "_" + this.extra['id'] + ".json";
+            formData.append(filename, JSON.stringify(this.extra));
             return axios.post(
                 '/api/upload',
                 formData,
