@@ -19,12 +19,15 @@ export default {
 	],
 	data() {
 		return {
-			state: 'default'
+			state: 'default',
+            message: null,
 		};
 	},
 	computed: {
 		description() {
-			if (this.state === 'error') {
+            if (this.message) {
+                return this.message;
+            } else if (this.state === 'error') {
 				return 'Publishing to eurodatacube failed';
 			}
 			else if (this.state === 'success') {
@@ -36,14 +39,20 @@ export default {
 		}
 	},
     methods: {
-        upload() {
+        async upload () {
             const formData = new FormData();
             const filename = this.title.replace(" ", "-") + "_" + this.extra['id'] + ".json";
             formData.append(filename, JSON.stringify(this.extra));
-            return axios.post(
-                '/api/upload',
-                formData,
-            );
+            try {
+                const result = await axios.post(
+                    '/api/upload',
+                    formData,
+                );
+                this.message = null;
+            } catch (error) {
+                this.message = error.response.data.detail;
+                throw error;
+            }
         }
     }
 }
