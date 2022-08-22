@@ -233,11 +233,14 @@ export default {
 		}
 
         this.$nextTick(async () => {
-            this.serverUrl = "https://w0j9yieg9l.execute-api.eu-central-1.amazonaws.com/testing";
-            await this.initConnection(false, true);
-            this.$nextTick(async () => {
-                await this.initDiscovery(this.basicProvider);
-            });
+            setTimeout(
+                async () => {
+                    this.serverUrl = "https://w0j9yieg9l.execute-api.eu-central-1.amazonaws.com/testing";
+                    await this.initConnection(false, true);
+                    await this.initDiscovery(this.basicProvider);
+                    },
+                500
+            );
         });
 	},
 	methods: {
