@@ -235,7 +235,7 @@ export default {
         this.$nextTick(async () => {
             setTimeout(
                 async () => {
-                    this.serverUrl = "https://w0j9yieg9l.execute-api.eu-central-1.amazonaws.com/testing";
+                    this.serverUrl = "https://jjdxlu8vwl.execute-api.eu-central-1.amazonaws.com/production";
                     await this.initConnection(false, true);
                     await this.initDiscovery(this.basicProvider);
                     },
